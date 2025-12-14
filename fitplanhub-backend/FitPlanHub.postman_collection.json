@@ -1,0 +1,235 @@
+{
+    "info": {
+      "name": "FitPlanHub API",
+      "description": "Complete API collection for FitPlanHub Backend",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:5000/api",
+        "type": "string"
+      },
+      {
+        "key": "trainerToken",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "userToken",
+        "value": "",
+        "type": "string"
+      }
+    ],
+    "item": [
+      {
+        "name": "Authentication",
+        "item": [
+          {
+            "name": "Register Trainer",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "url": "{{baseUrl}}/auth/register",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"John Trainer\",\n  \"email\": \"john@trainer.com\",\n  \"password\": \"password123\",\n  \"role\": \"trainer\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Register User",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "url": "{{baseUrl}}/auth/register",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Jane User\",\n  \"email\": \"jane@user.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Login Trainer",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "url": "{{baseUrl}}/auth/login",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"john@trainer.com\",\n  \"password\": \"password123\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Login User",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "url": "{{baseUrl}}/auth/login",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"jane@user.com\",\n  \"password\": \"password123\"\n}"
+              }
+            }
+          },
+          {
+            "name": "Get Current User",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/auth/me"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fitness Plans",
+        "item": [
+          {
+            "name": "Create Plan (Trainer)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {"key": "Content-Type", "value": "application/json"},
+                {"key": "Authorization", "value": "Bearer {{trainerToken}}"}
+              ],
+              "url": "{{baseUrl}}/plans",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"title\": \"Fat Loss Beginner Plan\",\n  \"description\": \"A comprehensive 30-day plan designed for beginners looking to lose fat\",\n  \"price\": 49.99,\n  \"duration\": 30\n}"
+              }
+            }
+          },
+          {
+            "name": "Get All Plans (Public)",
+            "request": {
+              "method": "GET",
+              "url": "{{baseUrl}}/plans"
+            }
+          },
+          {
+            "name": "Get All Plans (Authenticated)",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/plans"
+            }
+          },
+          {
+            "name": "Get Single Plan",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/plans/:planId"
+            }
+          },
+          {
+            "name": "Get My Plans (Trainer)",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{trainerToken}}"}],
+              "url": "{{baseUrl}}/plans/trainer/my-plans"
+            }
+          },
+          {
+            "name": "Update Plan (Trainer)",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {"key": "Content-Type", "value": "application/json"},
+                {"key": "Authorization", "value": "Bearer {{trainerToken}}"}
+              ],
+              "url": "{{baseUrl}}/plans/:planId",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"title\": \"Fat Loss Advanced Plan\",\n  \"price\": 69.99\n}"
+              }
+            }
+          },
+          {
+            "name": "Delete Plan (Trainer)",
+            "request": {
+              "method": "DELETE",
+              "header": [{"key": "Authorization", "value": "Bearer {{trainerToken}}"}],
+              "url": "{{baseUrl}}/plans/:planId"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Subscriptions",
+        "item": [
+          {
+            "name": "Subscribe to Plan",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/subscriptions/:planId"
+            }
+          },
+          {
+            "name": "Get My Subscriptions",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/subscriptions"
+            }
+          },
+          {
+            "name": "Check Subscription Status",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/subscriptions/check/:planId"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Follow System",
+        "item": [
+          {
+            "name": "Follow Trainer",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/follows/:trainerId"
+            }
+          },
+          {
+            "name": "Unfollow Trainer",
+            "request": {
+              "method": "DELETE",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/follows/:trainerId"
+            }
+          },
+          {
+            "name": "Get My Follows",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/follows"
+            }
+          },
+          {
+            "name": "Check Follow Status",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/follows/check/:trainerId"
+            }
+          },
+          {
+            "name": "Get Personalized Feed",
+            "request": {
+              "method": "GET",
+              "header": [{"key": "Authorization", "value": "Bearer {{userToken}}"}],
+              "url": "{{baseUrl}}/follows/feed/personalized"
+            }
+          }
+        ]
+      }
+    ]
+  }
