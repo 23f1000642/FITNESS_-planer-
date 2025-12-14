@@ -1,0 +1,74 @@
+.landing {
+    min-height: 80vh;
+  }
+  
+  .landing-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    color: white;
+  }
+  
+  .landing-title {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+  }
+  
+  .landing-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    margin: 0;
+  }
+  
+  .landing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  
+  .no-plans {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+  }
+  
+  .no-plans h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .landing-title {
+      font-size: 2rem;
+    }
+  
+    .landing-subtitle {
+      font-size: 1.1rem;
+    }
+  
+    .plans-grid {
+      grid-template-columns: 1fr;
+    }
+  }
